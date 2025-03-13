@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using System;
+using DraughtsGame.UI.App;
 
 namespace DraughtsGame;
 

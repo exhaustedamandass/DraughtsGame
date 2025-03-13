@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using DraughtsGame.DataModels;
+
+namespace DraughtsGame.DataModels;
 
 public class Board
 {
-    private const int Size = 8;
+    public const int Size = 8;
     private IBoardCell[,] _board;
 
     public Board()
@@ -16,9 +17,9 @@ public class Board
     public void Initialize()
     {
         // Initialize every cell as empty.
-        for (int row = 0; row < Size; row++)
+        for (var row = 0; row < Size; row++)
         {
-            for (int col = 0; col < Size; col++)
+            for (var col = 0; col < Size; col++)
             {
                 _board[row, col] = EmptyCell.Instance;
             }
