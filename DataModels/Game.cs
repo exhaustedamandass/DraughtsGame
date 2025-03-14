@@ -80,4 +80,14 @@ public class Game
         }
         return true;
     }
+    
+    public Game Clone()
+    {
+        Game newGame = new Game();
+        newGame.Board = Board.Clone();
+        // Set the current player and game over flag.
+        newGame.CurrentPlayer = CurrentPlayer;
+        newGame.IsGameOver = IsGameOver;
+        return newGame;
+    }
 }

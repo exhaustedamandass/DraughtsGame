@@ -208,4 +208,29 @@ public class Board
             }
         }
     }
+    
+    public Board Clone()
+    {
+        Board newBoard = new Board();
+        // Reinitialize with empty cells first.
+        for (int row = 0; row < Board.Size; row++)
+        {
+            for (int col = 0; col < Board.Size; col++)
+            {
+                Position pos = new Position(row, col);
+                var cell = this.GetCellAt(pos);
+                if (!cell.IsEmpty && cell is Piece piece)
+                {
+                    // Create a new piece with the same properties.
+                    newBoard.SetCellAt(pos, new Piece(piece.Owner, piece.Type));
+                }
+                else
+                {
+                    newBoard.SetCellAt(pos, EmptyCell.Instance);
+                }
+            }
+        }
+        return newBoard;
+    }
+
 }

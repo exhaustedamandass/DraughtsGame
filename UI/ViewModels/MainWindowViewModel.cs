@@ -17,7 +17,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
+    
     public MainWindowViewModel()
     {
         Game = new Game();
@@ -27,6 +27,4 @@ public class MainWindowViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName]string propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-    // TODO: Add commands for user interactions (e.g. selecting a piece, making a move)
 }

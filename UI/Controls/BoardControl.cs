@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -18,7 +19,7 @@ public class BoardControl : Control
         get => GetValue(GameProperty);
         set => SetValue(GameProperty, value);
     }
-
+    
     // Holds the currently selected cell (if any).
     private Position? _selectedCell;
 
