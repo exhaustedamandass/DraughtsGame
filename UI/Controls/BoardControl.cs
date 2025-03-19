@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -22,6 +21,8 @@ public class BoardControl : Control
     
     // Holds the currently selected cell (if any).
     private Position? _selectedCell;
+
+    public event EventHandler MoveCompleted;
 
     public override void Render(DrawingContext context)
     {
@@ -156,6 +157,7 @@ public class BoardControl : Control
                         // Clear selection after a successful move.
                         _selectedCell = null;
                         InvalidateVisual();
+                        OnMoveCompleted();
                     }
                 }
                 else
@@ -174,6 +176,22 @@ public class BoardControl : Control
                     }
                 }
             }
+        }
+    }
+
+    private void OnMoveCompleted()
+    {
+        MoveCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    protected void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    {
+        base.OnPropertyChanged(change);
+        
+        // If the Game property changes, invalidate the visual to force a redraw
+        if (change.Property == GameProperty)
+        {
+            InvalidateVisual();
         }
     }
 }

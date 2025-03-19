@@ -4,15 +4,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:DraughtsGame.UI.Controls"
         xmlns:viewModels="clr-namespace:DraughtsGame.UI.ViewModels"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
         x:Class="DraughtsGame.UI.Views.MainWindow"
-        Title="Draughts Game" Width="600" Height="600"
+        Title="Draughts Game" Width="800" Height="600"
         x:DataType="viewModels:MainWindowViewModel">
     <Window.DataContext>
         <viewModels:MainWindowViewModel />
     </Window.DataContext>
-    <Grid>
-        <!-- The BoardControl binds to the Game instance in the ViewModel -->
-        <controls:BoardControl Game="{Binding Game}" />
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Top Menu -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Spacing="10">
+            <Button Content="New Game" Command="{Binding NewGameCommand}" />
+            <Button Content="Bot Move" Command="{Binding MakeBotMoveCommand}" />
+        </StackPanel>
+        
+        <!-- Game Board -->
+        <Grid Grid.Row="1">
+            <!-- The BoardControl binds to the Game instance in the ViewModel -->
+            <controls:BoardControl Game="{Binding Game}" MoveCompleted="OnMoveCompleted" />
+        </Grid>
+        
+        <!-- Bottom Status and Settings -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="10">
+            <!-- Status Message -->
+            <TextBlock Grid.Column="0" Text="{Binding StatusMessage}" 
+                       VerticalAlignment="Center" FontSize="16" />
+            
+            <!-- Bot Settings -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                <CheckBox Content="Enable Bot" IsChecked="{Binding IsBotEnabled}" />
+                
+                <StackPanel Orientation="Horizontal" Spacing="5" IsEnabled="{Binding IsBotEnabled}">
+                    <TextBlock Text="Bot plays as:" VerticalAlignment="Center" />
+                    <ComboBox SelectedIndex="{Binding BotPlayer, Converter={StaticResource PlayerToIndexConverter}}">
+                        <ComboBoxItem Content="Red" />
+                        <ComboBoxItem Content="White" />
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Spacing="5" IsEnabled="{Binding IsBotEnabled}">
+                    <TextBlock Text="Time limit (ms):" VerticalAlignment="Center" />
+                    <NumericUpDown Value="{Binding BotTimeLimitMs}" 
+                                  Minimum="100" Maximum="10000" Increment="100" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

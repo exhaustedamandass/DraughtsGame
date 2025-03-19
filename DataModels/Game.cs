@@ -42,6 +42,7 @@ public class Game
         Board.ApplyMove(move);
         SwitchTurn();
         CheckGameOver();
+        
         return true;
     }
 

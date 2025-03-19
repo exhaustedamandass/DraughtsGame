@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using DraughtsGame.UI.ViewModels;
 
 namespace DraughtsGame.UI.Views;
 
@@ -17,5 +18,13 @@ public partial class MainWindow : Window
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+    }
+    
+    private void OnMoveCompleted(object sender, System.EventArgs e)
+    {
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.OnPlayerMoveCompleted();
+        }
     }
 }

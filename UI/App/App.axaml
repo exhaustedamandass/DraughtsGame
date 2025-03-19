@@ -1,5 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:DraughtsGame.UI.Converters"
              x:Class="DraughtsGame.UI.App.App"
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -7,4 +8,8 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+
+    <Application.Resources>
+        <converters:PlayerToIndexConverter x:Key="PlayerToIndexConverter" />
+    </Application.Resources>
 </Application>
